@@ -1,6 +1,7 @@
 {
     "name": "apaoww/yii2-dbmanager-oci8",
     "description": "Auth Dbmanager for Yii2 for Oracle db Customize for Oci8 driver ",
+    "version":"1.0.0",
     "keywords": ["yii", "admin", "auth"],
     "type": "yii2-extension",
     "license": "BSD-3-Clause",
