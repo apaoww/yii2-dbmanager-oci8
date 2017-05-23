@@ -739,4 +739,6 @@ class DbManager extends BaseManager
     {
         return !$this->detectLoop($parent, $child);
     }
+
+    public function getChildRoles(){}
 }
