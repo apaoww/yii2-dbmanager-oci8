@@ -142,7 +142,7 @@ class DbManager extends BaseManager
             return null;
         }
 
-        if (!isset($row['data']) || ($data = @unserialize($row['data'])) === false) {
+        if (!isset($row['DATA']) || ($data = @unserialize($row['DATA'])) === false) {
             $data = null;
         }
 
@@ -173,13 +173,13 @@ class DbManager extends BaseManager
         }
         $this->db->createCommand()
             ->insert($this->itemTable, [
-                'name' => $item->name,
-                'type' => $item->type,
-                'description' => $item->description,
-                'rule_name' => $item->ruleName,
-                'data' => $item->data === null ? null : serialize($item->data),
-                'created_at' => $item->createdAt,
-                'updated_at' => $item->updatedAt,
+                'NAME' => $item->name,
+                'TYPE' => $item->type,
+                'DESCRIPTION' => $item->description,
+                'RULE_NAME' => $item->ruleName,
+                'DATA' => $item->data === null ? null : serialize($item->data),
+                'CREATED_AT' => $item->createdAt,
+                'UPDATED_AT' => $item->updatedAt,
             ])->execute();
 
         return true;
@@ -192,15 +192,15 @@ class DbManager extends BaseManager
     {
         if (!$this->supportsCascadeUpdate()) {
             $this->db->createCommand()
-                ->delete($this->itemChildTable, ['OR', 'parent=:name', 'child=:name'], [':name' => $item->name])
+                ->delete($this->itemChildTable, ['OR', 'PARENT=:name', 'CHILD=:name'], [':name' => $item->name])
                 ->execute();
             $this->db->createCommand()
-                ->delete($this->assignmentTable, ['item_name' => $item->name])
+                ->delete($this->assignmentTable, ['ITEM_NAME' => $item->name])
                 ->execute();
         }
 
         $this->db->createCommand()
-            ->delete($this->itemTable, ['name' => $item->name])
+            ->delete($this->itemTable, ['NAME' => $item->name])
             ->execute();
 
         return true;
@@ -213,13 +213,13 @@ class DbManager extends BaseManager
     {
         if (!$this->supportsCascadeUpdate() && $item->name !== $name) {
             $this->db->createCommand()
-                ->update($this->itemChildTable, ['parent' => $item->name], ['parent' => $name])
+                ->update($this->itemChildTable, ['PARENT' => $item->name], ['PARENT' => $name])
                 ->execute();
             $this->db->createCommand()
-                ->update($this->itemChildTable, ['child' => $item->name], ['child' => $name])
+                ->update($this->itemChildTable, ['CHILD' => $item->name], ['CHILD' => $name])
                 ->execute();
             $this->db->createCommand()
-                ->update($this->assignmentTable, ['item_name' => $item->name], ['item_name' => $name])
+                ->update($this->assignmentTable, ['ITEM_NAME' => $item->name], ['ITEM_NAME' => $name])
                 ->execute();
         }
 
@@ -227,13 +227,13 @@ class DbManager extends BaseManager
 
         $this->db->createCommand()
             ->update($this->itemTable, [
-                'name' => $item->name,
-                'description' => $item->description,
-                'rule_name' => $item->ruleName,
-                'data' => $item->data === null ? null : serialize($item->data),
-                'updated_at' => $item->updatedAt,
+                'NAME' => $item->name,
+                'DESCRIPTION' => $item->description,
+                'RULE_NAME' => $item->ruleName,
+                'DATA' => $item->data === null ? null : serialize($item->data),
+                'UPDATED_AT' => $item->updatedAt,
             ], [
-                'name' => $name,
+                'NAME' => $name,
             ])->execute();
 
         return true;
@@ -253,10 +253,10 @@ class DbManager extends BaseManager
         }
         $this->db->createCommand()
             ->insert($this->ruleTable, [
-                'name' => $rule->name,
-                'data' => serialize($rule),
-                'created_at' => $rule->createdAt,
-                'updated_at' => $rule->updatedAt,
+                'NAME' => $rule->name,
+                'DATA' => serialize($rule),
+                'CREATED_AT' => $rule->createdAt,
+                'UPDATED_AT' => $rule->updatedAt,
             ])->execute();
 
         return true;
@@ -269,7 +269,7 @@ class DbManager extends BaseManager
     {
         if (!$this->supportsCascadeUpdate() && $rule->name !== $name) {
             $this->db->createCommand()
-                ->update($this->itemTable, ['rule_name' => $rule->name], ['rule_name' => $name])
+                ->update($this->itemTable, ['RULE_NAME' => $rule->name], ['RULE_NAME' => $name])
                 ->execute();
         }
 
@@ -277,11 +277,11 @@ class DbManager extends BaseManager
 
         $this->db->createCommand()
             ->update($this->ruleTable, [
-                'name' => $rule->name,
-                'data' => serialize($rule),
-                'updated_at' => $rule->updatedAt,
+                'NAME' => $rule->name,
+                'DATA' => serialize($rule),
+                'UPDATED_AT' => $rule->updatedAt,
             ], [
-                'name' => $name,
+                'NAME' => $name,
             ])->execute();
 
         return true;
@@ -294,12 +294,12 @@ class DbManager extends BaseManager
     {
         if (!$this->supportsCascadeUpdate()) {
             $this->db->createCommand()
-                ->delete($this->itemTable, ['rule_name' => $rule->name])
+                ->delete($this->itemTable, ['RULE_NAME' => $rule->name])
                 ->execute();
         }
 
         $this->db->createCommand()
-            ->delete($this->ruleTable, ['name' => $rule->name])
+            ->delete($this->ruleTable, ['NAME' => $rule->name])
             ->execute();
 
         return true;
