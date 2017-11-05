@@ -563,7 +563,7 @@ class DbManager extends BaseManager
         $query = (new Query)
             ->select(['NAME', 'TYPE', 'DESCRIPTION', 'RULE_NAME', 'DATA', 'CREATED_AT', 'UPDATED_AT'])
             ->from([$this->itemTable, $this->itemChildTable])
-            ->where(['PARENT' => $name, 'NAME' => new Expression('"CHILD"')]);
+            ->where(['PARENT' => $name, 'NAME' => new Expression('child')]);
 
         $children = [];
         foreach ($query->all($this->db) as $row) {
