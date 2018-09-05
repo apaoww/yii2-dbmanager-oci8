@@ -46,6 +46,10 @@ return [
 		....
 		'authManager' => [
                     'class' => 'apaoww\DbManagerOci8\DbManager', // or use 'yii\rbac\DbManager'
+		    'itemTable' => 'SCHEMANAME.AUTH_ITEM',
+            	    'assignmentTable' => 'SCHEMANAME.AUTH_ASSIGNMENT',
+                    'itemChildTable' => 'SCHEMANAME.AUTH_ITEM_CHILD',
+                    'ruleTable' => 'SCHEMANAME.AUTH_RULE',
                 ],
 ];
 ```
