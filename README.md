@@ -53,3 +53,11 @@ return [
                 ],
 ];
 ```
+Custom Auth's Table Migration
+---------------------------
+
+You may want to create auth's table using migration command. Instead of using yii default migrate (yii migrate), specify the custom migrationPath to point to custom auth's table migration, all column are uppercase. 
+
+```
+php yii migrate --migrationPath=@apaoww/DbManagerOci8/migrations
+```
