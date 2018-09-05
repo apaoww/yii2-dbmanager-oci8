@@ -38,40 +38,40 @@ class m140506_102106_rbac_init extends \yii\db\Migration
         }
 
         $this->createTable($authManager->ruleTable, [
-            'name' => Schema::TYPE_STRING . '(64) NOT NULL',
-            'data' => Schema::TYPE_TEXT,
-            'created_at' => Schema::TYPE_INTEGER,
-            'updated_at' => Schema::TYPE_INTEGER,
-            'PRIMARY KEY ("name")',
+            'NAME' => Schema::TYPE_STRING . '(64) NOT NULL',
+            'DATA' => Schema::TYPE_TEXT,
+            'CREATED_AT' => Schema::TYPE_INTEGER,
+            'UPDATED_AT' => Schema::TYPE_INTEGER,
+            'PRIMARY KEY ("NAME")',
         ], $tableOptions);
 
         $this->createTable($authManager->itemTable, [
-            'name' => Schema::TYPE_STRING . '(64) NOT NULL',
-            'type' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'description' => Schema::TYPE_TEXT,
-            'rule_name' => Schema::TYPE_STRING . '(64)',
-            'data' => Schema::TYPE_TEXT,
-            'created_at' => Schema::TYPE_INTEGER,
-            'updated_at' => Schema::TYPE_INTEGER,
-            'PRIMARY KEY ("name")',
-            'FOREIGN KEY ("rule_name") REFERENCES ' . $authManager->ruleTable . ' ("name") ON DELETE SET NULL',
+            'NAME' => Schema::TYPE_STRING . '(64) NOT NULL',
+            'TYPE' => Schema::TYPE_INTEGER . ' NOT NULL',
+            'DESCRIPTION' => Schema::TYPE_TEXT,
+            'RULE_NAME' => Schema::TYPE_STRING . '(64)',
+            'DATA' => Schema::TYPE_TEXT,
+            'CREATED_AT' => Schema::TYPE_INTEGER,
+            'UPDATED_AT' => Schema::TYPE_INTEGER,
+            'PRIMARY KEY ("NAME")',
+            'FOREIGN KEY ("RULE_NAME") REFERENCES ' . $authManager->ruleTable . ' ("NAME") ON DELETE SET NULL',
         ], $tableOptions);
-        $this->createIndex('idx-auth_item-type', $authManager->itemTable, 'type');
+        $this->createIndex('IDX_AUTH_ITEM_TYPE', $authManager->itemTable, 'TYPE');
 
         $this->createTable($authManager->itemChildTable, [
-            'parent' => Schema::TYPE_STRING . '(64) NOT NULL',
-            'child' => Schema::TYPE_STRING . '(64) NOT NULL',
-            'PRIMARY KEY ("parent", "child")',
-            'FOREIGN KEY ("parent") REFERENCES ' . $authManager->itemTable . ' ("name") ON DELETE CASCADE',
-            'FOREIGN KEY ("child") REFERENCES ' . $authManager->itemTable . ' ("name") ON DELETE CASCADE',
+            'PARENT' => Schema::TYPE_STRING . '(64) NOT NULL',
+            'CHILD' => Schema::TYPE_STRING . '(64) NOT NULL',
+            'PRIMARY KEY ("PARENT", "CHILD")',
+            'FOREIGN KEY ("PARENT") REFERENCES ' . $authManager->itemTable . ' ("NAME") ON DELETE CASCADE',
+            'FOREIGN KEY ("CHILD") REFERENCES ' . $authManager->itemTable . ' ("NAME") ON DELETE CASCADE',
         ], $tableOptions);
 
         $this->createTable($authManager->assignmentTable, [
-            'item_name' => Schema::TYPE_STRING . '(64) NOT NULL',
-            'user_id' => Schema::TYPE_STRING . '(64) NOT NULL',
-            'created_at' => Schema::TYPE_INTEGER,
-            'PRIMARY KEY ("item_name", "user_id")',
-            'FOREIGN KEY ("item_name") REFERENCES ' . $authManager->itemTable . ' ("name") ON DELETE CASCADE',
+            'ITEM_NAME' => Schema::TYPE_STRING . '(64) NOT NULL',
+            'USER_ID' => Schema::TYPE_STRING . '(64) NOT NULL',
+            'CREATED_AT' => Schema::TYPE_INTEGER,
+            'PRIMARY KEY ("ITEM_NAME", "USER_ID")',
+            'FOREIGN KEY ("ITEM_NAME") REFERENCES ' . $authManager->itemTable . ' ("NAME") ON DELETE CASCADE',
         ], $tableOptions);
     }
 
