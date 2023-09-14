@@ -18,7 +18,7 @@
     "require": {
         "yiisoft/yii2": "~2.0",
         "yiisoft/yii2-jui": "~2.0",
-        "apaoww/yii2-oci8": "2.0.2"
+        "apaoww/yii2-oci8": ">=2.0.2"
     },
     "autoload": {
         "psr-4": {
